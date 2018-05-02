@@ -9,8 +9,9 @@ r = redis.StrictRedis()
 def action_parser():
     _dict = {\
              'class': 'action',
-             'hostname': str(request.args.get('ip')),
+             'ip': str(request.args.get('ip')),
              'type': str(request.args.get('type')),
+             'project': str(request.args.get('project')),
              'created_date': str(datetime.datetime.now()),
             }
     pprint(_dict)
@@ -21,8 +22,9 @@ def action_parser():
 def info_parser():
     _dict = {\
              'class': 'info',
-             'hostname': str(request.args.get('ip')),
+             'ip': str(request.args.get('ip')),
              'type': str(request.args.get('type')),
+             'project': str(request.args.get('project')),
              'created_date': str(datetime.datetime.now()),
             }
     pprint(_dict)
@@ -30,4 +32,4 @@ def info_parser():
     return 'OK'
 
 if __name__=='__main__':
-    app.run()
+    app.run(host='0.0.0.0', port=5000)

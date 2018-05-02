@@ -1,0 +1,39 @@
+version: '2' 
+
+services:
+  queue:
+    image: redis:alpine
+    hostname: redis
+    restart: always
+    volumes:
+      - /opt/redis/queue:/data
+    ports:
+      - 6379:6379
+    network_mode: host
+    logging:
+      driver: json-file
+      options:
+        max-size: 50m
+
+  api:
+    image: api:alpha
+    hostname: api
+    restart: always
+    ports:
+      - 5000:5000
+    network_mode: host
+    logging:
+      driver: json-file
+      options:
+        max-size: 50m
+
+  worker:
+    image: worker:alpha
+    restart: always
+    network_mode: host
+    logging:
+      driver: json-file
+      options:
+        max-size: 50m
+    volumes:
+      - /root/.ssh:/root/.ssh
