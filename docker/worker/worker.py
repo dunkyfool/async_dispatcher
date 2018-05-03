@@ -34,10 +34,9 @@ def listen():
 def trigger(action):
     cmd = 'ssh miuser@' + \
             action['ip']+' docker run --rm --name ' + \
-            action['project']+' --network host -d worker:alpha'
+            action['project']+' --network host -d python:2 sleep infinity'
     print cmd
     os.system(cmd)
-    time.sleep(1)
     print 'trigger complete'
 
 
